@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>testing pattern</title>
+	<style>
+		body {
+			margin: 0 auto;
+			text-align: center;
+		}
+		#myCanvas {
+			margin-top: 20px;
+			width: 500px;
+			height: 500px;
+			border: 1px solid #000;
+			background-color: #000;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas"></canvas>
+	<p>
+		<button id="play">PAUSE</button>
+	</p>
+
+<script type="text/javascript">
+	let canvas = document.querySelector('#myCanvas');
+	let context = canvas.getContext("2d");
+	context.strokeStyle = "#fff";
+	context.lineWidth = 2;
+	context.lineHeight = 2;
+	let x = 0, y = 0, space = 10;
+	let play = 1;
+
+	// drawing a cross
+	let draw = () => {
+		if(play == 1){
+			if(Math.random() > 0.5) {
+				context.moveTo( x , y); // (x,y)
+				context.lineTo(x + space , y + space); // (x,y)
+				context.stroke();			
+			} else{
+				context.moveTo(x + 10 , y); // (x,y)
+				context.lineTo(x , y + 10); // (x,y)
+				context.stroke();
+			}
+			x += space;
+			if(x > canvas.width) {
+				x = 0;
+				y += space; 
+			}
+		}
+	}
+
+	setInterval(draw , 100)
+
+	let playButton = document.querySelector("#play");
+	playButton.onclick = function() { 
+		play == 1 ? play = 0 : play = 1;
+		this.innerText == "PAUSE" ? this.innerText = "PLAY" : this.innerText = "PAUSE";
+	};
+
+
+
+
+</script>
+</body>
+</html>
